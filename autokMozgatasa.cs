@@ -78,6 +78,8 @@
             Console.WriteLine();
 
             //6. feladat
+
+            //7. feladat
             Dictionary<string, string> elsoJelzes = new Dictionary<string, string>();
             Dictionary<string, string> utolsoJelzes = new Dictionary<string, string>();
 
