@@ -1,4 +1,4 @@
-﻿namespace autokMozgatasa
+namespace autokMozgatasa
 {
     internal class Program
     {
@@ -78,6 +78,40 @@
             Console.WriteLine();
 
             //6. feladat
+            Console.WriteLine("6. feladat");
+            Console.Write("Kérem, adja meg a rendszámot: ");
+            string keresett = Console.ReadLine();
+
+            double osszTavolsag = 0;
+            bool voltTalalat = false;
+            int elozoIdoPercben = -1;
+            int elozoSebesseg = 0;
+
+            foreach (var sor in sorok)
+            {
+                string[] tomb = sor.Split('\t');
+                if (tomb[0] == keresett)
+                {
+                    voltTalalat = true;
+                    int aktIdoPercben = int.Parse(tomb[1]) * 60 + int.Parse(tomb[2]);
+
+                    if (elozoIdoPercben != -1)
+                    {
+                        int elteltIdo = aktIdoPercben - elozoIdoPercben;
+                        osszTavolsag += elozoSebesseg * (elteltIdo / 60.0);
+                    }
+
+                    Console.WriteLine($"{tomb[1]}:{tomb[2]} {osszTavolsag:F1} km");
+
+                    elozoIdoPercben = aktIdoPercben;
+                    elozoSebesseg = int.Parse(tomb[3]);
+                }
+            }
+
+            if (!voltTalalat)
+            {
+                Console.WriteLine("Nincs ilyen rendszámú jármű az adatok között!");
+            }
 
             //7. feladat
             Dictionary<string, string> elsoJelzes = new Dictionary<string, string>();
